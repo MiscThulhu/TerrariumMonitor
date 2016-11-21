@@ -1,0 +1,290 @@
+﻿<Window x:Class="TerrariumMonitor.Options"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TerrariumMonitor"
+        mc:Ignorable="d"
+        Title="Options" 
+        Height="315" 
+        Width="523.83"
+        Style="{DynamicResource FlatWindowOptions}">
+    <Window.Resources>
+        <SolidColorBrush x:Key="brsh_Background_Normal" Color="#2c2c2c"/>
+        <SolidColorBrush x:Key="brsh_Background_Disabled" Color="#202020"/>
+        <SolidColorBrush x:Key="brsh_Background_MouseOver" Color="#404040"/>
+
+        <SolidColorBrush x:Key="brsh_Border_Normal" Color="#696969"/>
+        <SolidColorBrush x:Key="brsh_Border_Disabled" Color="#505050"/>
+        <SolidColorBrush x:Key="brsh_Border_MouseOver" Color="#919191"/>
+
+        <SolidColorBrush x:Key="brsh_Foreground_Normal" Color="#c3c3c3"/>
+        <SolidColorBrush x:Key="brsh_Foreground_Disabled" Color="#919191"/>
+
+        <Style x:Key="FlatWindowOptions" TargetType="{x:Type Window}">
+            <Setter Property="Foreground" Value="{StaticResource brsh_Foreground_Normal}"/>
+            <Setter Property="Background" Value="{StaticResource brsh_Background_Disabled}"/>
+            <Setter Property="WindowStyle" Value="None"/>
+            <Setter Property="AllowsTransparency" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <Grid Margin="6">
+                            <Grid.Effect>
+                                <DropShadowEffect BlurRadius="6" 
+                                                  Direction="360" 
+                                                  RenderingBias="Quality" 
+                                                  ShadowDepth="0" 
+                                                  Color="Orange"/>
+                            </Grid.Effect>
+                            <Border x:Name="BorderMain"
+                                BorderThickness="0"
+                                BorderBrush="{DynamicResource brsh_Foreground_Normal}"
+                                Background="{StaticResource brsh_Background_Disabled}">
+                                <DockPanel LastChildFill="True">
+                                    <Border x:Name="PART_TITLEBAR"
+                                        Margin="0,0,0,0"
+                                        Height="30"
+                                        DockPanel.Dock="Top"
+                                        Background="Transparent"
+                                        MouseLeftButtonDown="PART_TITLEBAR_MouseLeftButtonDown">
+                                        <DockPanel LastChildFill="False">
+                                            <Image Margin="5,0,0,0"
+                                                   VerticalAlignment="Center"
+                                                   Height="22"
+                                                   Width="22"
+                                                   Source="Res/Images/Eye.ico"/>
+                                            <TextBlock Margin="5,0,0,0"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="{StaticResource brsh_Foreground_Normal}"
+                                                   TextWrapping="NoWrap"
+                                                   Text="{TemplateBinding Title}"
+                                                   FontSize="16"
+                                                   Height="22"/>
+                                        </DockPanel>
+                                    </Border>
+                                    <AdornerDecorator DockPanel.Dock="Bottom">
+                                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                      Content="{TemplateBinding Content}"
+                                                      ContentStringFormat="{TemplateBinding ContentStringFormat}"/>
+                                    </AdornerDecorator>
+                                </DockPanel>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Label x:Name="lb_Groups" 
+               Content="Groups:" 
+               HorizontalAlignment="Left" 
+               Margin="10,12,0,0" 
+               VerticalAlignment="Top"/>
+
+        <ComboBox x:Name="cmbx_Groups" 
+                  HorizontalAlignment="Left" 
+                  Margin="324,10,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="178"
+                  IsSynchronizedWithCurrentItem="True"
+                  SelectionChanged="cmbx_Groups_SelectionChanged"
+                  DisplayMemberPath="ID"
+                  Style="{DynamicResource CmBx_Flt_Buttons}"/>
+
+        <Label x:Name="lb_Mode" 
+               Content="Mode:" 
+               HorizontalAlignment="Left" 
+               Margin="10,39,0,0" 
+               VerticalAlignment="Top"/>
+
+        <ComboBox x:Name="cmbx_Mode" 
+                  HorizontalAlignment="Left" 
+                  Margin="324,37,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="178"
+                  IsSynchronizedWithCurrentItem="True"
+                  SelectionChanged="cmbx_Mode_SelectionChanged"
+                  SelectedValuePath="Content"
+                  Style="{DynamicResource CmBx_Flt}">
+            <ListBoxItem Content="COM"/>
+            <ListBoxItem Content="Network(Not Implemented)"/>
+            <ListBoxItem Content="Simulation"/>
+        </ComboBox>
+
+        <Label x:Name="lb_COM" 
+               Content="COM Name:" 
+               HorizontalAlignment="Left" 
+               Margin="10,66,0,0" 
+               VerticalAlignment="Top"/>
+
+        <ComboBox x:Name="cmbx_COM" 
+                  HorizontalAlignment="Left" 
+                  Margin="324,64,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="178"
+                  IsSynchronizedWithCurrentItem="True"
+                  SelectionChanged="cmbx_COM_SelectionChanged"
+                  SelectedValuePath="Content"
+                  Style="{DynamicResource CmBx_Flt}"/>
+
+        <Label x:Name="lb_Baud" 
+               Content="Baud Rate:" 
+               HorizontalAlignment="Left" 
+               Margin="10,91,0,0" 
+               VerticalAlignment="Top"/>
+
+        <ComboBox x:Name="cmbx_BaudRate" 
+                  HorizontalAlignment="Left" 
+                  Margin="324,91,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="178"
+                  IsSynchronizedWithCurrentItem="True"
+                  SelectionChanged="cmbx_BaudRate_SelectionChanged"
+                  SelectedValuePath="Content"
+                  Style="{DynamicResource CmBx_Flt}">
+            <ListBoxItem Content="2400"/>
+            <ListBoxItem Content="4800"/>
+            <ListBoxItem Content="9600"/>
+            <ListBoxItem Content="14400"/>
+            <ListBoxItem Content="19200"/>
+            <ListBoxItem Content="28800"/>
+        </ComboBox>
+
+        <Label x:Name="lb_Terrariums" 
+               Content="Terrariums:" 
+               HorizontalAlignment="Left" 
+               Margin="10,140,0,0" 
+               VerticalAlignment="Top"/>
+
+        <ComboBox x:Name="cmbx_Terrariums" 
+                  HorizontalAlignment="Left" 
+                  Margin="324,140,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="178"
+                  IsSynchronizedWithCurrentItem="True"
+                  SelectionChanged="cmbx_Terrariums_SelectionChanged"
+                  DisplayMemberPath="Name"
+                  Style="{DynamicResource CmBx_Flt_Buttons}"/>
+
+        <Label x:Name="lb_Probes" 
+               Content="Probes" 
+               HorizontalAlignment="Left" 
+               Margin="10,167,0,0" 
+               VerticalAlignment="Top"/>
+
+        <ComboBox x:Name="cmbx_Probes"
+                  HorizontalAlignment="Left"
+                  Margin="324,167,0,0"
+                  VerticalAlignment="Top"
+                  Width="178"
+                  IsSynchronizedWithCurrentItem="True"
+                  SelectionChanged="cmbx_Probes_SelectionChanged"
+                  DisplayMemberPath="Name"
+                  Style="{DynamicResource CmBx_Flt_Buttons}"/>
+
+        <Label x:Name="lb_Units"
+               Content="Units:" 
+               HorizontalAlignment="Left" 
+               Margin="10,194,0,0" 
+               VerticalAlignment="Top"/>
+
+        <ComboBox x:Name="cmbx_Units" 
+                  HorizontalAlignment="Left" 
+                  Margin="324,194,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="178"
+                  IsSynchronizedWithCurrentItem="True"
+                  SelectionChanged="cmbx_Units_SelectionChanged"
+                  SelectedValuePath="Content"
+                  Style="{DynamicResource CmBx_Flt}">
+            <ListBoxItem Content="%"/>
+            <ListBoxItem Content="°C"/>
+            <ListBoxItem Content="°F"/>
+            <ListBoxItem Content="°K"/>
+        </ComboBox>
+
+        <Button x:Name="bttn_Apply" 
+                Content="Apply" 
+                HorizontalAlignment="Left" 
+                Margin="10,241,0,0" 
+                VerticalAlignment="Top" 
+                Width="178"
+                Height="22"
+                Click="bttn_Apply_Click"
+                Style="{DynamicResource Bttn_Flt}"/>
+
+        <Button x:Name="bttn_Cancel" 
+                Content="Cancel" 
+                HorizontalAlignment="Left" 
+                Margin="324,241,0,0" 
+                VerticalAlignment="Top" 
+                Width="178"
+                Height="22"
+                Click="bttn_Close_Click"
+                Style="{DynamicResource Bttn_Flt}"/>
+
+        <TextBox x:Name="tb_AddGroup" 
+                 HorizontalAlignment="Left" 
+                 Height="22" 
+                 Margin="172,10,0,0" 
+                 TextWrapping="Wrap" 
+                 Text="" 
+                 VerticalAlignment="Top" 
+                 Width="120"
+                 Style="{DynamicResource TxtBx_Flt}"/>
+
+        <Button x:Name="bttn_AddGroup" 
+                Content="+" 
+                HorizontalAlignment="Left" 
+                Margin="297,10,0,0" 
+                VerticalAlignment="Top" 
+                Width="22"
+                Height="22"
+                Style="{DynamicResource Bttn_Flt}"
+                Click="bttn_AddGroup_Click"/>
+
+        <TextBox x:Name="tb_AddTerrarium" 
+        	HorizontalAlignment="Left" 
+        	Height="22" 
+        	Margin="172,140,0,0" 
+        	TextWrapping="Wrap" 
+        	Text="" 
+        	VerticalAlignment="Top" 
+        	Width="120"
+        	Style="{DynamicResource TxtBx_Flt}"/>
+
+        <Button x:Name="bttn_AddTerrarium" 
+        	Content="+" 
+        	HorizontalAlignment="Left" 
+        	Margin="297,140,0,0" 
+        	VerticalAlignment="Top" 
+        	Width="22"
+        	Height="22"
+        	Style="{DynamicResource Bttn_Flt}"
+            Click="bttn_AddTerrarium_Click"/>
+        
+        <TextBox x:Name="tb_AddProbe" 
+        	HorizontalAlignment="Left" 
+        	Height="22" 
+        	Margin="172,167,0,0" 
+        	TextWrapping="Wrap" 
+        	Text="" 
+        	VerticalAlignment="Top" 
+        	Width="120"
+        	Style="{DynamicResource TxtBx_Flt}"/>
+        
+        <Button x:Name="bttn_AddProbe" 
+        	Content="+" 
+        	HorizontalAlignment="Left" 
+        	Margin="297,167,0,0" 
+        	VerticalAlignment="Top" 
+        	Width="22"
+        	Height="22"
+        	Style="{DynamicResource Bttn_Flt}"
+            Click="bttn_AddProbe_Click"/>
+
+
+    </Grid>
+</Window>

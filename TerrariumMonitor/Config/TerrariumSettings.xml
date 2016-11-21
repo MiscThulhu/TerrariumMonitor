@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Groups>
+  <Group Name="Example Group">
+    <Port Type="Simulation" Name="COM3" Baud="9600" />
+    <Terrariums>
+      <Terrarium Name="Terrarium 1">
+        <Sensor Type="Temp Hot" Units="°C" />
+        <Sensor Type="Temp Cold" Units="°C" />
+      </Terrarium>
+      <Terrarium Name="Terrarium 2">
+        <Sensor Type="Temp Hot" Units="°C" />
+        <Sensor Type="Temp Cold" Units="°C" />
+      </Terrarium>
+    </Terrariums>
+  </Group>
+</Groups>
